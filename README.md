@@ -1,4 +1,4 @@
-App Engine application for the Udacity training course.
+Conference Central for the Udacity Project 4
 
 ## Products
 - [App Engine][1]
