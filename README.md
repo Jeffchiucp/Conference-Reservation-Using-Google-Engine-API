@@ -69,3 +69,12 @@ I added the following endpoint methods in conferencepy
 [4]: https://console.developers.google.com/
 [5]: https://localhost:8080/
 [6]: https://developers.google.com/appengine/docs/python/endpoints/endpoints_tool
+
+
+#### #2: Add Sessions to User Wishlist
+
+I modified the `Profile` model to accommodate a 'wishlist' stored as a repeated key property field, named `sessionsToAttend`.  In order to interact with this model in the API, I also had modify some of the previous methods in Task 1 to return a unique web-safe key for sessions.  I added two endpoint methods to the API:
+
+- `addSessionToWishlist`: given a session websafe key, saves a session to a user's wishlist.
+- `getSessionsInWishlist`: return a user's wishlist.
+
