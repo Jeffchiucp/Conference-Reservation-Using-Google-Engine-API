@@ -87,3 +87,10 @@ I added two endpoint methods for additional queries that I thought would be usef
 -`getTBDSessions`: returns sessions missing time/date information. Many times, conferences will know the speakers who will attend, but don't necessarily know the time and date that they will speak. As an administrative task, this might be a useful query to pair with some background methods to automatically notify the creator to fill in the necessary data as the conference or session dates approach.
 
 For the specialized query, finding non-workshop sessions before 7pm, I ran into the limitations with using ndb/Datastore queries.  Queries are only allowed to have one inequality filter, and it would cause a `BadRequestError` to filter on both `startDate` and `typeOfSession`.  As a result, a workaround I implemented was to first query sessions before 7pm with `ndb`, and then manually filter that list with native Python to remove sessions with a 'workshop' type.  This could have been done in reverse, and the query which would filter the most entities should be done with `ndb`.
+
+
+#### #4: Add Featured Speaker
+
+I modified the `createSession` endpoint to cross-check if the speaker appeared in any other of the conference's sessions.  If so, the speaker name and relevant session names were added to the memcache under the `featured_speaker` key.  I added a final endpoint, `getFeaturedSpeaker`, which would check the memcache for the featured speaker.  If empty, it would simply pull the next upcoming speaker.
+
+
