@@ -50,7 +50,32 @@ The API is hosted on Google App Engine as application ID [conference-app-fullsta
 - [Data Modeling for Google App Engine Using Python and ndb (Screencast)](https://www.youtube.com/watch?v=xZsxWn58pS0)
 - [App Engine Modeling: Parent-Child Models (GitHub)](https://github.com/GoogleCloudPlatform/appengine-modeling-ndb/blob/master/parent_child_models.py)
 
+Task 1: Add Sessions to a Conference
 
+Overview
+
+Sessions can have speakers, start time, duration, type of session (workshop, lecture etc…), location. You will need to define the Session class and the SessionForm class, as well as appropriate Endpoints.
+You are free to choose how you want to define speakers, eg just as a string or as a full fledged entity.
+Define Session class and SessionForm
+
+In the SessionForm pass in:
+Session name
+highlights
+speaker
+duration
+typeOfSession
+date
+start time (in 24 hour notation so it can be ordered).
+Ideally, create the session as a child of the conference.
+Define the following Endpoints methods
+
+getConferenceSessions(websafeConferenceKey) -- Given a conference, return all sessions
+getConferenceSessionsByType(websafeConferenceKey, typeOfSession) Given a conference, return all sessions of a specified type (eg lecture, keynote, workshop)
+getSessionsBySpeaker(speaker) -- Given a speaker, return all sessions given by this particular speaker, across all conferences
+createSession(SessionForm, websafeConferenceKey) -- open only to the organizer of the conference
+Explain your design choices
+
+Explain in a couple of paragraphs your design choices for session and speaker implementation
 ### Design and Improvement Tasks
 
 #### #1 Add Sessions to a Conference
