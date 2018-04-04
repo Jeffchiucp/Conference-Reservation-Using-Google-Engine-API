@@ -1,11 +1,14 @@
 Conference Central 
 
 ## Products
-- [App Engine][1]
+- [Google App Engine][1]
 
-https://full-stack-conference.appspot.com/#/
+https://conference-app-fullstack.appspot.com/#
 ## Language
-- [Python][2]
+- [Python]
+- [JavaScript]
+- [HTML]
+- [CSS]
 
 ## APIs
 - [Google Cloud Endpoints][3]
@@ -21,7 +24,6 @@ https://full-stack-conference.appspot.com/#/
 4. (Optional) Mark the configuration files as unchanged as follows:
    `$ git update-index --assume-unchanged app.yaml settings.py static/js/app.js`
 5. Need to change the Client-ID for Google Sign Up API. 
-Line 89 in app.js
 
 1. Run the app with the devserver using `dev_appserver.py DIR`, and ensure it's running by visiting your local server's address (by default [localhost:8080][5].)
 1. (Optional) Generate your client library(ies) with [the endpoints tool][6].
@@ -93,28 +95,5 @@ I added the following endpoint methods in conferencepy
 [4]: https://console.developers.google.com/
 [5]: https://localhost:8080/
 [6]: https://developers.google.com/appengine/docs/python/endpoints/endpoints_tool
-
-
-#### #2: Add Sessions to User Wishlist
-
-I modified the `Profile` model to accommodate a 'wishlist' stored as a repeated key property field, named `sessionsToAttend`.  In order to interact with this model in the API, I also had modify some of the previous methods in Task 1 to return a unique web-safe key for sessions.  I added two endpoint methods to the API:
-
-- `addSessionToWishlist`: given a session websafe key, saves a session to a user's wishlist.
-- `getSessionsInWishlist`: return a user's wishlist.
-
-
-#### #3: Indexes and Queries
-
-I added two endpoint methods for additional queries that I thought would be useful for this application:
-
--`getConferenceSessionFeed`: returns a conference's sorted feed sessions occurring same day or later. This would be useful for users to see a chronologically sorted, upcoming "feed," similar to something like Meetup's feed.
--`getTBDSessions`: returns sessions missing time/date information. Many times, conferences will know the speakers who will attend, but don't necessarily know the time and date that they will speak. As an administrative task, this might be a useful query to pair with some background methods to automatically notify the creator to fill in the necessary data as the conference or session dates approach.
-
-For the specialized query, finding non-workshop sessions before 7pm, I ran into the limitations with using ndb/Datastore queries.  Queries are only allowed to have one inequality filter, and it would cause a `BadRequestError` to filter on both `startDate` and `typeOfSession`.  As a result, a workaround I implemented was to first query sessions before 7pm with `ndb`, and then manually filter that list with native Python to remove sessions with a 'workshop' type.  This could have been done in reverse, and the query which would filter the most entities should be done with `ndb`.
-
-
-#### #4: Add Featured Speaker
-
-I modified the `createSession` endpoint to cross-check if the speaker appeared in any other of the conference's sessions.  If so, the speaker name and relevant session names were added to the memcache under the `featured_speaker` key.  I added a final endpoint, `getFeaturedSpeaker`, which would check the memcache for the featured speaker.  If empty, it would simply pull the next upcoming speaker.
 
 
