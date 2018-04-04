@@ -1,4 +1,4 @@
-Conference Central for the Udacity Project 4
+Conference Central 
 
 ## Products
 - [App Engine][1]
@@ -44,7 +44,6 @@ The API is hosted on Google App Engine as application ID [conference-app-fullsta
 
 
 ### Useful resources
-- [Udacity Git Hub](https://github.com/udacity/fullstack-nanodegree-conference/blob/master/models.py)
 - [Google App Engine Python Docs](https://cloud.google.com/appengine/docs/python/)
 - [Programming Google App Engine (Book)](http://www.amazon.com/Programming-Google-App-Engine-Sanderson/dp/144939826X)
 - [Data Modeling for Google App Engine Using Python and ndb (Screencast)](https://www.youtube.com/watch?v=xZsxWn58pS0)
